@@ -62,7 +62,7 @@ add_student() {
         echo "Student with ID $id already exists."
         return
     else
-        echo "$name $id $gpa" >> students.txt
+        echo "$name , $id , $gpa" >> students.txt
         echo "Student added successfully."
     fi
 }
@@ -112,9 +112,9 @@ modify_student() {
     read id
     if grep -qw "$id" students.txt; then
         old_data=$(grep -w "$id" students.txt)
-        old_name=$(echo "$old_data" | cut -d' ' -f1)
-        old_id=$(echo "$old_data" | cut -d' ' -f2)
-        old_gpa=$(echo "$old_data" | cut -d' ' -f3)
+        old_name=$(echo "$old_data" | cut -d',' -f1)
+        old_id=$(echo "$old_data" | cut -d',' -f2)
+        old_gpa=$(echo "$old_data" | cut -d',' -f3)
 
         while true; do
             echo "What would you like to modify?"
@@ -189,7 +189,7 @@ while true; do
             1) add_student;;
             2) delete_student;;
             3) search_student;;
-            4) displaystudents;;
+            4) display_students;;
             5) calculate_average_gpa;;
             6) modify_student;;
             7) set_password;;
